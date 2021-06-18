@@ -62,6 +62,7 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     
     <figure class="highcharts-figure">
         <div id="container"></div>
@@ -72,6 +73,24 @@
     
 
     <script>
+         $(document).ready(function () {
+            // console.log( "ready!" );
+            get_data();
+        });
+        function get_data() {
+            url = "/api/data"
+            // var myusername = 'testing';
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function (data) {
+                    // $("#resultarea").text(data);
+                    console.log(data);
+                    plot_chart(data);
+                }
+            });
+        } //- get data
+function plot_chart(result_data) {
 
   // Create the chart
 Highcharts.chart('container', {
@@ -118,113 +137,14 @@ Highcharts.chart('container', {
 
     series: [
         {
-            name: "",
-            colorByPoint: true,
-            data: [
-                {
-                    name: "Niger",
-                    y: 49.80,
-                    
-                },
-                {
-                    name: "Mali",
-                    y: 47.30,
-                   
-                },
-                {
-                    name: "Chad",
-                    y: 46.80,
-                   
-                },
-                {
-                    name: "Angola",
-                    y: 46.60,
-                   
-                },
-                {
-                    name: "Uganda",
-                    y: 46.50,
-                    
-                },
-                {
-                    name: "Somalia",
-                    y: 46.40,
-                  
-                },
-                {
-                    name: "Congo, Dem. Rep.",
-                    y: 46.00,
-                    
-                },
-                 {
-                    name: "Burundi",
-                    y: 45.40,
-                    
-                },
-                 {
-                    name: "Zambia",
-                    y: 44.50,
-                    
-                },
-                 {
-                    name: "Mozambique",
-                    y: 44.40,
-                    
-                },
-                {
-                    name: "Gambia",
-                    y: 44.10,
-                    
-                },
-                {
-                    name: "Tanzania",
-                    y: 43.80,
-                   
-                },
-                {
-                    name: "Nigera",
-                    y: 43.70,
-                   
-                },
-                {
-                    name: "Malavi",
-                    y: 43.50,
-                   
-                },
-                {
-                    name: "Guinea",
-                    y: 43.40,
-                    
-                },
-                {
-                    name: "Senegal",
-                    y: 42.80,
-                  
-                },
-                {
-                    name: "Afghanisthan",
-                    y: 42.50,
-                    
-                },
-                 {
-                    name: "Cameroon",
-                    y: 42.40,
-                    
-                },
-                 {
-                    name: "Benin",
-                    y: 42.20,
-                    
-                },
-                 {
-                    name: "Guinea-Bissau",
-                    y: 42.20,
-                    
-                }
-            ]
-        }
-    ],
+                name: "youngest countries",
+                data: result_data['data_list']
+            }
+        ]
+
+    
 });
+}
 </script>
 
 </body>

@@ -8,41 +8,51 @@ def get_data():
 
     country                                     = df['Country'].tolist()
     population                                  = df['Population'].tolist()
-   
+    data_list =[]
+    for row in df.values:
+        print(row[0])
+        curent_dict = {
+            "name" : row[0],
+            "y" : row[1]
+        }
+        data_list.append(curent_dict)
+    
+    result = {
+        "data_list" : data_list 
 
-    list_of_tuples = [tuple(row) for row in df.values]
-  
-    print(list_of_tuples)
-
-    result_dict = {
-        'country'                                    : country,
-        'population'                                :  population,
-        
-       
-        # 'data_list'         : list_of_tuples
     }
+    return result
+    # result_dict = {
+    #     'Country'                                    : country,
+        
+    #      'data_list'              : [{
+    #          "name":"Population",
+    #          "y":population
+    #      }
+    #      ]
+    # }
 
     # print(result_dict)
 
-    return result_dict
+    # return result_dict
 
-# def add_row(Lake, Area):
+def add_row(country, population):
 
-#     df = pd.read_csv('data.csv') 
+    df = pd.read_csv('data.csv') 
 
-#     new_row = {
+    new_row = {
     
-#         'Lake'       : Lake, 
-#         'Area'        : Area
-#     }
+        'Country'       : country, 
+        'Population'        : population
+    }
 
-#     print(df)
+    print(df)
 
-#     df = df.append(new_row, ignore_index=True)
+    df = df.append(new_row, ignore_index=True)
 
-#     print(df)
+    print(df)
 
-#     df.to_csv('data.csv')
+    df.to_csv('data.csv')
 
 if __name__ == "__main__":
     get_data()

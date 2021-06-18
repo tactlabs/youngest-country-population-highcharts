@@ -14,7 +14,7 @@ def startpy():
 http://0.0.0.0:3000/api/data
 '''
 
-@app.route("/api/data", methods=["GET"])
+@app.route("/api/data", methods=["GET","POST"])
 def api_get_data():
 
     result = business.get_data()
@@ -34,19 +34,19 @@ http://0.0.0.0:3000/api/add
 http://0.0.0.0:3000/api/add?year=2017&ontario_tourist=20345&quebec_tourist=200
 http://0.0.0.0:3000/api/add?year=2021&pytorch=180&tensorFlow=90
 '''
-# @app.route("/api/add", methods=["GET"])
-# def api_add_data():
+@app.route("/api/add", methods=["GET"])
+def api_add_data():
 
-#     Lake           = request.values.get('Lake')
-#     Area           = request.values.get('Area')
+    country          = request.values.get('Country')
+    population           = request.values.get('Population')
 
-#     result = {
-#         'Lake'          : Lake,
-#         'Area'           : Area
-#     }
-#     result_data = business.add_row(Lake, Area)
+    result = {
+        'Country'          : country,
+        'Population'           : population
+    }
+    result_data = business.add_row(country, population)
 
-#     return jsonify(result)
+    return jsonify(result)
 
 
 if __name__ == "__main__":
